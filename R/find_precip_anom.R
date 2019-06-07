@@ -1,12 +1,24 @@
+
 find_precip_anom = function(precip) {
 
+  min_precip = min(precip$Anomaly)
+  dry_year = precip %>%
+    filter(Anomaly == min_precip) %>%
+    select(Date) %>%
+    as.numeric()
+  max_precip = max(precip$Anomaly)
+  wet_year = precip %>%
+    filter(Anomaly == max_precip) %>%
+    select(Date) %>%
+    as.numeric()
 
-  max_anom_precip = max(precip$Anomaly)
-  min_anom_precip = min(precip$Anomaly)
 
 
-  return(list(precip_min = min_anom_precip,
-              precip_max = max_anom_precip
+  return(list(min_temp = min_precip,
+              cool_year = dry_year,
+              max_temp = max_precip,
+              warm_year = wet_year
   ))
 
 }
+

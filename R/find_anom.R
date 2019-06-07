@@ -1,12 +1,23 @@
 
 find_anom = function(temp) {
 
-  max_anom_temp = max(temp$Anomaly)
-  min_anom_temp = min(temp$Anomaly)
+  min_temp = min(temp$Anomaly)
+  cool_year = temp %>%
+    filter(Anomaly == min_temp) %>%
+    select(Date) %>%
+    as.numeric()
+  max_temp = max(temp$Anomaly)
+  warm_year = temp %>%
+    filter(Anomaly == max_temp) %>%
+    select(Date) %>%
+  as.numeric()
 
 
-  return(list(temps_min = min_anom_temp,
-             temps_max = max_anom_temp,
+
+  return(list(min_temp = min_temp,
+            cool_year = cool_year,
+             max_temp = max_temp,
+             warm_year = warm_year
              ))
 
 }
