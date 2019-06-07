@@ -20,7 +20,7 @@ tanom <- temp$Value
 
 source("R/find_anom.R")
 
-find_anom(precip, temp)
+find_anom(temp)
 
 ```
 
