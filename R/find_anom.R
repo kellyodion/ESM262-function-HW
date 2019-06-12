@@ -1,3 +1,17 @@
+#' find_anom
+#'
+#' Find the years with the highest and lowest temperature anomalies between 1895-2019
+#' @param temp data frame with columns Date, Value, Anomaly
+#' @author Andrew Paterson and Kelly Odion
+#' @example find_anom(temp)
+#' @return Returns a list containing,
+#' \describe{
+#'  \item{min_temp}{thelowest temperature anomaly}
+#'  \item{cool_year}{Year associated with the lowest temperature anomaly
+#'  \item{min_temp}{the highest temperature anomaly}
+#'  \item{warm_year}{year associated with the highest temperature anomaly}
+#'  }
+
 
 find_anom = function(temp) {
 
