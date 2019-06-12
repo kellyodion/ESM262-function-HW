@@ -1,16 +1,21 @@
 library(testthat)
 
+source("R/find_anom.R")
+
 context("test-find_anom")
 
-test_that("find_anom_works",
-  {temp_data = as.data.frame(cbind(Date = c("2000", "2001", "2002", "2003"), Location = c("Brisbane", "Brisbane", "Brisbane", "Brisbane"),
-                                               Anomaly=rep(1, times=4)))
+test_that("please_work", {
+  test_data =
+    data.frame(
+      Date = c(1:4),
+      Value = c(1:4),
+      Anomaly = c(1:4)
+    )
 
+  expect_true(as.integer(find_anom(test_data)$max_temp) == 4)
 
-
-
-    expect_that(find_anom(temp_data, plot_out=TRUE)$min_temp$find_anom, equals(1))
-  })
+}
+)
 
 
 
