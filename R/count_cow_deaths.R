@@ -13,17 +13,15 @@ count_cow_deaths = function(temp) {
 
 
   cows_df <- temp %>%
-    dplyr::mutate(Value = mean_temp,
-                  Date = year
-                  ) %>%
-    mutate(cow_deaths = case_when(mean_temp >= 50 ~ mean_temp*100,
-                                     mean_temp < 40 ~ 0)) %>%
-    group_by(year) %>%
-    summarise(cow_mortality = sum(hospital_bill, na.rm = TRUE)) %>%
-    as.numeric()
+    mutate(cow_deaths = case_when(Value >= 50 ~ Value*100,
+                                  Value < 50 ~ Value*20),
+           lost_revenue = cow_deaths*4000) %>%
+    group_by(Date) %>%
+    summarise(cow_mortality = sum(cow_deaths, na.rm = TRUE),
+              lost_revenue = sum(lost_revenue, na.rm = TRUE)) %>%
+    ungroup()
 
-  return(list(table = cows_df))
+  return(cows_df)
 
 }
 
-### No applicable method for mutate to an object of class numeric
