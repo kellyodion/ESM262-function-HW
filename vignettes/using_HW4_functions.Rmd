@@ -1,0 +1,93 @@
+---
+title: "Vignette"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{my-vignette}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(HW4)
+```
+
+```{r, include = FALSE}
+library(tidyverse)
+```
+
+
+```{r}
+#get our data 
+
+data(precip)
+data(temp)
+
+
+```
+
+
+Functions find_anom and find_precip_anom: Precipiation and temperature anomalies
+```{r, error = TRUE}
+
+#this function looks at temperature and precipitation data and returns the minumum and maximum values along with the correspending year each value occured in 
+
+
+# example data for precipitation
+precip_data =
+    data.frame(
+        Date = c(1:16),
+        Value = c(1:16),
+        Anomaly = c(1:16)
+    )
+precip_data
+
+find_precip_anom(precip_data)
+
+#example data for temperature 
+
+temp_data =
+    data.frame(
+        Date = c(1:16),
+        Value = c(1:16),
+        Anomaly = c(1:16)
+    )
+
+temp_data
+
+find_anom(temp_data)
+
+```
+
+
+function: crop_loss 
+```{r}
+#this function uses climate and temerature data to compute the biggest drought and wet years 
+
+
+```
+
+
+function: measure_river_flow
+```{r}
+# example dataset
+crop_rain = rnorm(500, mean = 10 , sd = 4)
+dates = seq(from = 1920, to = 2010, by = 10)
+locations = c("SB", "LA", "SF","SLO","SD")
+ca_rain <- matrix(crop_rain, nrow = 10, ncol = 5,
+                       dimnames = list(c(dates), c(locations)))
+# example of what data looks like
+ca_rain
+#function output
+calc_crop_cost(ca_rain, 10, .5, 1000, 1.50)
+```

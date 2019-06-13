@@ -5,15 +5,22 @@ source("R/crop_loss.R")
 
 library(testthat)
 
-test_that("shows_min", {
-  test_data =
-    data.frame(
-      Date = c(1:4),
-      Value = c(1:4),
-      Anomaly = c(1:4)
-    )
+test_that("ratio_is_positive", {
+  precip =
+      data_frame(
+      Date = c(2002,2003, 2004, 2005),
+      Precipitation = c(1:4),
+      Precipitation_Anomaly = c(1:4))
+  temp = data_frame(
+    Date = c(2002, 2003, 2004, 2005),
+    Temperature = c(1:4),
+    Temperature_Anomaly = c(1:4))
 
-  expect_true(as.integer(find_precip_anom(test_data)$min_precip) == 1)
+
+  expect_that(as.integer(crop_loss$drought_ratio) > 0)
 
 }
 )
+
+
+

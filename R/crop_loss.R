@@ -21,3 +21,5 @@ crop_loss = function(temp, precip) {
               wet = wet_ratio))
 
 }
+
+
