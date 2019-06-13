@@ -17,7 +17,7 @@ test_that("ratio_is_positive", {
     Temperature_Anomaly = c(1:4))
 
 
-  expect_true(as.integer(crop_loss(precip, temp)$drought) > 0)
+  expect_true(as.integer(crop_loss(data_frame)$drought_ratio) > 0)
 
 }
 )

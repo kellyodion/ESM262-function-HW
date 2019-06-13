@@ -80,14 +80,5 @@ function: crop_loss
 
 function: measure_river_flow
 ```{r}
-# example dataset
-crop_rain = rnorm(500, mean = 10 , sd = 4)
-dates = seq(from = 1920, to = 2010, by = 10)
-locations = c("SB", "LA", "SF","SLO","SD")
-ca_rain <- matrix(crop_rain, nrow = 10, ncol = 5,
-                       dimnames = list(c(dates), c(locations)))
-# example of what data looks like
-ca_rain
-#function output
-calc_crop_cost(ca_rain, 10, .5, 1000, 1.50)
+
 ```
