@@ -22,4 +22,22 @@ crop_loss = function(precip, temp) {
 
 }
 
+catch_fish <- function(price, catch, plot = F) {
 
+  most_common_fish = list(colnames(catch), rownames(catch)[apply(catch, 2, which.max)])
+  total_revenue = sum(price[,1]* catch)
+  loc_revenue = price[,1] * catch
+  loc_revenue = colSums(loc_revenue)
+  loc_revenue_df = data.frame(loc_revenue)
+  loc_revenue_df$location = c(rownames(loc_revenue_df))
+  if (plot) {                                           #create plot if user selects true
+    lb = sprintf("Total Revenue is $%d", total_revenue) #display total revenue
+    p = ggplot(loc_revenue_df, aes(location, loc_revenue, fill=location))+
+      geom_col()+
+      labs(y="Revenue ($)")+annotate("text", x=2, y=30000, label=lb, col="black") +
+      theme_classic() +
+      scale_fill_manual(values = c("slategrey","skyblue", "#00AFBB", "cornflowerblue", "navy"))
+  }
+  else p=NULL #no plot if user selects false
+  return(list(MostFrequent = most_common_fish, TotalRevenue = total_revenue, Revenue_by_Location = loc_revenue_df, plot = p)) #return specified outputs
+}

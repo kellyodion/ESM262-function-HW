@@ -74,6 +74,21 @@ function: crop_loss
 ```{r}
 #this function uses climate and temerature data to compute the biggest drought and wet years 
 
+temp = rnorm(500, mean = 25, sd = 5)
+dates = seq(from = 1895, to = 2010, by = 10)
+locations = c("Willamette", "Central Valley", "Napa", "Columbia Valley","Central Coast")
+ca_temp <- matrix(temp, nrow = 10, ncol = 5,
+                       dimnames = list(c(dates), c(locations)))
+
+crop_rain = rnorm(500, mean = 1.5, sd = .5)
+dates = seq(from = 1895, to = 2010, by = 10)
+locations = c("Willamette", "Central Valley", "Napa","Columbia Valley","Central Coast")
+ca_rain <- matrix(rain, nrow = 10, ncol = 5,
+                       dimnames = list(c(dates), c(locations)))
+ 
+
+
+
 
 ```
 
