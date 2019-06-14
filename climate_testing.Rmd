@@ -32,7 +32,7 @@ find_precip_anom(precip)
 ```{r}
 source("R/crop_loss.R")
 
-crop_loss(data_frame)
+crop_loss(ag_temp)
 
 ```
 

@@ -72,18 +72,19 @@ find_anom(temp_data)
 
 function: crop_loss 
 ```{r}
-#this function uses climate and temerature data to compute the biggest drought and wet years 
+#this function uses climate and temerature data to compute the biggest drought and wet years by location
 
-temp = rnorm(500, mean = 25, sd = 5)
-dates = seq(from = 1895, to = 2010, by = 10)
-locations = c("Willamette", "Central Valley", "Napa", "Columbia Valley","Central Coast")
-ca_temp <- matrix(temp, nrow = 10, ncol = 5,
+#climate data
+temp = rnorm(500, mean = 30, sd = 10)
+dates = seq(from = 1920, to = 2010, by = 10)
+locations = c("Willamette", "Central_Valley", "Napa", "Columbia_Valley","Central_Coast")
+ag_temp <- matrix(temp, nrow = 10, ncol = 5,
                        dimnames = list(c(dates), c(locations)))
-
-crop_rain = rnorm(500, mean = 1.5, sd = .5)
-dates = seq(from = 1895, to = 2010, by = 10)
-locations = c("Willamette", "Central Valley", "Napa","Columbia Valley","Central Coast")
-ca_rain <- matrix(rain, nrow = 10, ncol = 5,
+#precip data
+rain = rnorm(500, mean = 1.5, sd = .5)
+dates = seq(from = 1920, to = 2010, by = 10)
+locations = c("Willamette", "Central_Valley", "Napa","Columbia_Valley","Central_Coast")
+ag_precip <- matrix(rain, nrow = 10, ncol = 5,
                        dimnames = list(c(dates), c(locations)))
  
 
@@ -95,5 +96,43 @@ ca_rain <- matrix(rain, nrow = 10, ncol = 5,
 
 function: measure_river_flow
 ```{r}
+#measures river flow given precipitation and year data 
+
+
+measure_river_flow = function(precip, year) {
+
+  riverflow <- precip %>%
+    dplyr::mutate(river_flow = Value*7500) %>%
+    filter(Date %in% year)
+
+  x <- mean(riverflow$river_flow)
+
+  return(x)
+} 
 
 ```
+
+function: count cow deaths 
+```{r}
+
+#uses temperature to calculate cow deaths 
+
+count_cow_deaths = function(temp) {
+
+
+  cows_df <- temp %>%
+    mutate(cow_deaths = case_when(Value >= 50 ~ Value*100,
+                                  Value < 50 ~ Value*20),
+           lost_revenue = cow_deaths*4000) %>%
+    group_by(Date) %>%
+    summarise(cow_mortality = sum(cow_deaths, na.rm = TRUE),
+              lost_revenue = sum(lost_revenue, na.rm = TRUE)) %>%
+    ungroup()
+
+  return(cows_df)
+
+}
+
+
+```
+
